@@ -7,8 +7,9 @@ Variables
 :root {
   --grid-template-columns: repeat(16, 1fr);
   --grid-template-rows: repeat(16, 1fr);
-  --contr-primary-bgcolor: #f8ecf0;
-  --sqr-primary-bgcolor:#f8ecf0;
+  --contr-primary-bgcolor: #D3D3D3;
+  --sqr-primary-bgcolor:  #D3D3D3;
+ 
 }
 
 
@@ -37,14 +38,14 @@ header h1 {
 nav {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 1rem;
 }
 
 .btn {
     text-transform: uppercase;
     background: transparent;
     color: #222;
-    padding: 0.375rem 0.75rem;
+    padding: 0.375rem 0.25rem;
     letter-spacing: 0.25rem;
     display: inline-block;
     transition: all 0.3s linear;
@@ -70,7 +71,7 @@ nav {
     min-height: 80vh;
     max-height: 80vh;
     height: auto;
-    width: 70%;
+    width: 80%;
     max-width: 1400px;
     display: grid;
     grid-template-columns: var(--grid-template-columns);
@@ -80,7 +81,7 @@ nav {
 }
 
 .square {
-  border: .5px solid black; 
+  border: .5px solid #a8a5a5; 
 }
 
 footer {
@@ -96,3 +97,5 @@ footer {
     flex-direction: column;
   }
 }
+
+

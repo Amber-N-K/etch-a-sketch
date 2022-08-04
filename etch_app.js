@@ -7,9 +7,7 @@ const container = document.querySelector('#container');
 const btnGridRequest = document.querySelector('.grid-request');
 const btnClear = document.querySelector('.btn-clear');
 //const square = document.getElementsByClassName("square");
-const square = document.querySelectorAll(".square");
 
-let gridNum;
 
 // When DOM Content Loads, the 16x16 div squares and grid will be created
 window.addEventListener('DOMContentLoaded', (event) => {
@@ -42,7 +40,7 @@ function gridTemplate(c) {
 };
 
 // Click New Grid Request button --> removes divs/squares & creates 16x16 grid
-btnGridRequest.addEventListener('click', (event) => {
+btnGridRequest.addEventListener('click', () => {
   container.onmouseover = pixelsBlack;
   removeAllChildNodes(container);
   gridRequest();
@@ -55,16 +53,16 @@ function removeAllChildNodes(parent) {
 };
 
 function gridRequest(){
-  let gridNum = prompt("How many squares would you like for the new grid? Enter a number from 1-100. Example: 50");
+  let gridNum = prompt("How many squares would you like for the new grid? Enter a number from 1-100 (ex: 50):");
   // Check if a whole number from 1-100.
   if (gridNum === "" || gridNum <= 1 || gridNum > 100 || gridNum - (Math.floor(gridNum)) !== 0 ) {
      alert(`Not a valid number. Enter a number from 1-100, example: 50`);
   }
   else {
-    divNum = gridNum * gridNum;
+    let divNum = gridNum * gridNum;
     createDivs(divNum);
     gridTemplate(gridNum);
-    container.style.backgroundColor = ('--sqr-primary-bgcolor', "#f8ecf0");
+    container.style.backgroundColor = '--contr-primary-bgcolor';
   }
   return gridNum;
 };
@@ -82,6 +80,8 @@ function reload() {
   location.reload();
 };
 
+const square = document.querySelectorAll(".square");
+
 /////// COLOR Options //////
 
 
@@ -90,8 +90,12 @@ function reload() {
 const sqrColorBtn = document.querySelector('.sqcolor-random');
 const sqrBlackBtn = document.querySelector('.sqblack');
 
-sqrColorBtn.addEventListener("click", function(event) {
-    if (event.target.textContent === "Random Square Color") {
+sqrColorBtn.addEventListener("click", (event) => {
+    if (event.target.textContent === "Random/Black Square Color") {
+      event.target.textContent = "Black Square Color";
+      pixelsColor(event);  
+    }
+    else if (event.target.textContent === "Random Square Color") {
       event.target.textContent = "Black Square Color";
       pixelsColor(event);  
     }
@@ -107,7 +111,8 @@ sqrColorBtn.addEventListener("click", function(event) {
 function pixelsBlack(event) {
   container.onmouseover = pixelsBlack;
   if (event.type == 'mouseover') {
-    event.target.style.backgroundColor = 'black';
+    event.target.style.borderColor = "transparent";
+    event.target.style.backgroundColor = "black";
     }
   if (event.type == 'mouseout') {
       event.target.style.backgroundColor = '';
@@ -118,6 +123,7 @@ function pixelsBlack(event) {
 function pixelsColor(event) {
   container.onmouseover = pixelsColor;
   if (event.type == 'mouseover') {
+    event.target.style.borderColor = "transparent";
     const newBgColor = randomColor();
     event.target.style.backgroundColor = ('--sqr-primary-bgcolor', newBgColor)
   }
@@ -136,7 +142,7 @@ bgColorBtn.addEventListener('click', setRandomBgColor);
 
 function setRandomBgColor() {
   const newBgColor = randomColor();
-  container.style.backgroundColor = ('--contr-primary-bgcolor', newBgColor)
+  container.style.backgroundColor = ('--sqr-primary-bgcolor', newBgColor)
 };
 
 function randomColor() {
@@ -151,8 +157,9 @@ function random(min,max) {
 /****** Blackish Square Color Option *******/
 
 function pixelsBlackish(event) {
-  container.onmouseleave = pixelsBlackish;
+  //container.onmouseleave = pixelsBlackish;
   if (event.type == 'mouseover') {
+    //event.target.style.borderColor = "transparent";
     const newBlackishColor = randomBlackColor();
     event.target.style.backgroundColor = ('--sqr-primary-bgcolor', newBlackishColor)
     }
@@ -177,4 +184,19 @@ function percentBlack(min) {
    //console.log(blackNum);
    return blackNum;
   };
+
+
+// Click in the grid to remove color square. 
+
+
+let click = true;
+
+container.addEventListener("click", (event) => {
+    if (event.type == click) {
+      event.target.style.backgroundColor = '--contr-primary-bgcolor';
+    }    
+    else if (event.type !== click) {
+      event.target.style.backgroundColor = "";
+    }
+})
 
